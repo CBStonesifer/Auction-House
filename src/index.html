@@ -4,9 +4,48 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    
     <title>NFT AUCTION HOUSE</title>
+    <!-- Here we import style sheet-->
+
 
   </head>
-  <body></body>
+  <center>
+  <h1>Auction House</h1>
+
+  <body>
+    <div>
+      <p><b>Here is what's being sold:</b></p>
+      <!-- Going to need a way to dynamically upload NFT url's to change out images: Ape example for placeholder-->
+          <img src="https://i.insider.com/624daec15bc85a0018d74321?width=700", width=10%/><br>
+          <a href="https://opensea.io/collection/boredapeyachtclub" target="blank_">Example: Bored Ape Yacht Club</a>
+        
+
+
+      <p>
+        <!-- Going to need to implement methods here to recieve the input bidding price and actually call the Auction Contract to submit the bid-->
+        <input type = "text" placeholder='Enter Bidding Price...(ETH)'>
+        <input type = "button" value = "Submit Bid">
+        <!-- Add a countdown progress bar here to know when bidding is over-->
+      </p>
+      <p><em>Current bidding price: <b> 1 ETH</b></em></p>
+      <p> This could be a description of the NFT, maybe information on the creator or collection</p>
+    </div>
+    <!-- Here we we add the script tags to grab the JS/Go code that controls this page-->
+
+    <div>
+      <h3>
+        Ready to auction off your NFT?
+      </h3>
+      <p>
+        <input type = "text" placeholder='NFT Contract Address'>
+        <input type = "button" value = "Add to Auction Queue">
+      </p>
+
+
+    </div>
+
+
+  </body>
+</center>
 </html>
