@@ -1,14 +1,16 @@
 pragma solidity >=0.4.16 <0.9.0;
 
-contract AuctionHouse{
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/ownership/Ownable.sol";
 
-    address public BUYER = msg.sender;
-    address NFT_ADDRESS = address(0x0); //temporarily just a jpeg
-    address OWNER_ADDRESS = address(0x0); //temporarily no owner
+contract AuctionHouse is ERC721, Ownable{
 
     uint numberOfBids = 0;
 
     uint startTime;
+
+    //Contract address => NFT_id => Auction Structure
+    mapping(address => mapping(uint256 => AuctionItem)) public listings ; //listings[contract address][tokenId] => returns AuctionItem information
 
     struct AuctionItem{
         address owner;
@@ -17,17 +19,18 @@ contract AuctionHouse{
         uint timeRemaining;
     }
 
-    AuctionItem public newItem;
-    constructor(){
-        newItem.owner = OWNER_ADDRESS;
-        newItem.NFT = NFT_ADDRESS;
-        newItem.price = 1 ether; //need to change this dynamically
-        newItem.timeRemaining = 60 minutes;
-        }
+    // AuctionItem public newItem;
+    // constructor(uint256 NFT_ADDRESS, address OWNER_ADDRESS, uint PRICE){
+    //     newItem.owner = OWNER_ADDRESS;
+    //     newItem.NFT = NFT_ADDRESS;
+    //     newItem.price = PRICE;
+    //     newItem.timeRemaining = 20 minutes;
+    //     }
 
 
     /**
     Associate highest bid with highest bidder in order to track who will win
+    Need to implement smt about keeping track of bids
      */
     mapping(uint => address) public highestBidder;
     
@@ -36,6 +39,21 @@ contract AuctionHouse{
      */
     event newHighestBidder(uint newBid);
 
+
+    /** Add listing function that takes (price, contractAddress, tokenID)
+            - erc721 NFT = erc721(contractAddress)
+            - balance of (msg.sender, tokenId)  the person listing must own the nft
+            - 
+        We need: only the owner can list his NFT, so check if the proposed NFT is theirs
+        We need: to intialize a listing of the NFT for auctioning
+        We need: the owner to give approval of the transaction when the auction is over
+     */
+     function createListing(uint256 NFT_ADDRESS, address OWNER_ADDRESS, uint PRICE) public{
+        ERC721 listedNFT = ERC721(contractAddress);
+        require(ownerOf(listedNFT) == OWNER_ADDRESS);
+
+     }
+     
     /**
     Function to place bid
      */
@@ -43,7 +61,7 @@ contract AuctionHouse{
         require(!auctionComplete());
         require(newItem.price < bidPrice);
         require(msg.value >= bidPrice);
-        highestBidder[bidPrice] = BUYER;
+        highestBidder[bidPrice] = msg.sender; //consider what happens if funds are spent after placing the bid, before auction is over
         newItem.price = bidPrice;
         numberOfBids++;
         emit newHighestBidder(bidPrice);
