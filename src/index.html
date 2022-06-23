@@ -5,15 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>NFT AUCTION HOUSE</title>
+    <title>NFTs AUCTION HOUSE</title>
     <!-- Here we import style sheet-->
-
-
+    
   </head>
   <center>
   <h1>Auction House</h1>
 
   <body>
+    
+<div>
+  <!-- https://www.youtube.com/watch?v=VdPUC-Gbnsk -->
+  <input type = "button" id='connect-button' value = "Connect MetaMask" >
+  <script>
+    document.getElementById('connect-button').addEventListener('click', event =>{
+      ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
+        account = accounts[0];
+        //add text update with account number
+        alert(account);
+        console.log(account);
+      })
+    })
+  </script>
+
+
+
+
+</div>
+
+
+
+
     <script type="module" src="js/AuctionHandler.js"></script>
     <div>
       <p><b>Here is what's being sold:</b></p>
