@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script language="javascript" type="text/javascript" src="web3.min.js"></script>
     
     <title>NFTs AUCTION HOUSE</title>
     <!-- Here we import style sheet-->
@@ -15,14 +16,13 @@
   <body>
     
 <div>
-  <!-- https://www.youtube.com/watch?v=VdPUC-Gbnsk -->
+  <!-- https://www.youtube.com/watch?v=Vd'PUC-Gbnsk -->
   <input type = "button" id='connect-button' value = "Connect MetaMask" >
   <script>
     document.getElementById('connect-button').addEventListener('click', event =>{
       ethereum.request({method: 'eth_requestAccounts'}).then(accounts => {
         account = accounts[0];
-        //add text update with account number
-        alert(account);
+        alert(account); // Here we can call a function to pass the account number from MetaMask to JS and then to Solidity
         console.log(account);
       })
     })

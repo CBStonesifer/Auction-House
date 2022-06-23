@@ -52,6 +52,11 @@ function doColor1(){
   cc1.style.backgroundColor ="blue";
 }
 
+//This will get the MetaMask public key and give it to the smart contract
+// function passMMAccount(myMM){
+//     Contracts.Auction.getMM(myMM);
+// }
+
 //import the json file created by the solidity file
 
 /*configure contract address and ABI
